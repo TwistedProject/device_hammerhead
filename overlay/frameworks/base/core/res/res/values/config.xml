@@ -135,6 +135,15 @@
          Used to decide if the user can change the colors -->
     <bool name="config_multiColorBatteryLed">true</bool>
 
+    <!-- Default LED off time for notification LED in milliseconds. -->
+    <integer name="config_defaultNotificationLedOff">9000</integer>
+
+    <!-- Is the battery LED intrusive? Used to decide if there should be a disable option -->
+    <bool name="config_intrusiveBatteryLed">true</bool>
+
+    <!-- Does the battery LED support multiple colors? Used to decide if the user can change the colors -->
+    <bool name="config_multiColorBatteryLed">true</bool>
+
     <!-- reference volume index for music stream to limit headphone volume and display warning -->
     <integer name="config_safe_media_volume_index">5</integer>
 
@@ -298,12 +307,19 @@
 
     <!-- Configure mobile tcp buffer sizes in the form:
          rat-name:rmem_min,rmem_def,rmem_max,wmem_min,wmem_def,wmem_max
-         If no value is found for the rat-name in use, the system default will be applied.
-    -->
+         If no value is found for the rat-name in use, the system default will be applied. -->
     <string-array name="config_mobile_tcp_buffers">
-        <item>hsdpa:4094,87380,704512,4096,16384,110208</item>
-        <item>hspa:4094,87380,704512,4096,16384,110208</item>
-        <item>hsupa:4094,87380,704512,4096,16384,110208</item>
+        <item>"lte:2097152,4194304,8388608,262144,524288,1048576"</item>
+        <item>"lte_ca:2097152,4194304,8388608,262144,524288,1048576"</item>
+        <item>"umts:4094,87380,1220608,4096,16384,1220608"</item>
+        <item>"hspa:4094,87380,1220608,4096,16384,1220608"</item>
+        <item>"hsupa:4094,87380,1220608,4096,16384,1220608"</item>
+        <item>"hsdpa:4094,87380,2441216,4096,16384,2441216"</item>
+        <item>"hspap:4094,87380,1220608,4096,16384,1220608"</item>
+        <item>"edge:4093,26280,35040,4096,16384,35040"</item>
+        <item>"gprs:4092,8760,11680,4096,8760,11680"</item>
+        <item>"evdo:4094,87380,1048576,4096,16384,262144"</item>
+        <item>"ehrpd:4094,87380,1048576,4096,16384,262144"</item>
     </string-array>
 
     <!-- The RadioAccessFamilies supported by the device.
@@ -317,4 +333,16 @@
 
     <!-- enable doze powersaving mode -->
     <bool name="config_enableAutoPowerModes">true</bool>
+
+    <!-- set proper wifi power ratios -->
+    <integer name="config_wifi_idle_receive_cur_ma">0</integer>
+    <integer name="config_wifi_active_rx_cur_ma">0</integer>
+    <integer name="config_wifi_tx_cur_ma">0</integer>
+    <integer name="config_wifi_operating_voltage_mv">0</integer>
+
+    <!-- set proper bluetooth power ratios -->
+    <integer name="config_bluetooth_idle_cur_ma">1</integer>
+    <integer name="config_bluetooth_rx_cur_ma">2</integer>
+    <integer name="config_bluetooth_tx_cur_ma">3</integer>
+    <integer name="config_bluetooth_operating_voltage_mv">4</integer>
 </resources>

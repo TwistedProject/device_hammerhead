@@ -19,14 +19,24 @@ TARGET_CPU_ABI2 := armeabi
 TARGET_ARCH := arm
 TARGET_ARCH_VARIANT := armv7-a-neon
 TARGET_CPU_VARIANT := krait
+TARGET_USE_KRAIT_BIONIC_OPTIMIZATION := true
+TARGET_USE_KRAIT_PLD_SET := true
 
 TARGET_NO_BOOTLOADER := true
 
 BOARD_KERNEL_BASE := 0x00000000
 BOARD_KERNEL_PAGESIZE := 2048
 
-BOARD_KERNEL_CMDLINE := console=ttyHSL0,115200,n8 androidboot.hardware=hammerhead user_debug=31 maxcpus=2 msm_watchdog_v2.enable=1
+BOARD_KERNEL_CMDLINE := console=ttyHSL0,115200,n8 androidboot.hardware=hammerhead user_debug=31 maxcpus=2 msm_watchdog_v2.enable=1 androidboot.selinux=permissive
 BOARD_MKBOOTIMG_ARGS := --ramdisk_offset 0x02900000 --tags_offset 0x02700000
+BOARD_KERNEL_IMAGE_NAME := zImage-dtb
+
+TOUCH_BOOST_DEBUG := false
+
+# Define kernel config for inline building
+TARGET_KERNEL_CONFIG := hells_defconfig
+TARGET_KERNEL_SOURCE := kernel/lge/hells-Core-N5
+TARGET_GCC_VERSION_ARM := 5.3
 
 TOUCH_BOOST_DEBUG := false
 
@@ -90,6 +100,7 @@ endif
 DONT_DEXPREOPT_PREBUILTS := true
 
 TARGET_USERIMAGES_USE_EXT4 := true
+TARGET_USERIMAGES_USE_F2FS := true
 BOARD_BOOTIMAGE_PARTITION_SIZE := 23068672
 BOARD_RECOVERYIMAGE_PARTITION_SIZE := 23068672
 BOARD_SYSTEMIMAGE_PARTITION_SIZE := 1073741824
@@ -134,7 +145,7 @@ HAVE_ADRENO_SOURCE:= false
 OVERRIDE_RS_DRIVER:= libRSDriver_adreno.so
 TARGET_FORCE_HWC_FOR_VIRTUAL_DISPLAYS := true
 
-TARGET_TOUCHBOOST_FREQUENCY:= 1200
+#TARGET_TOUCHBOOST_FREQUENCY:= 1200
 
 USE_DEVICE_SPECIFIC_QCOM_PROPRIETARY:= true
 USE_DEVICE_SPECIFIC_CAMERA:= true
@@ -150,3 +161,8 @@ USE_MINIKIN := true
 
 # Include an expanded selection of fonts
 EXTENDED_FONT_FOOTPRINT := true
+
+# Enable workaround for slow rom flash
+BOARD_SUPPRESS_SECURE_ERASE := true
+COMMON_GLOBAL_CFLAGS += -DNO_SECURE_DISCARD
+
