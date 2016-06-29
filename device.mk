@@ -20,11 +20,33 @@
 # Everything in this directory will become public
 
 
+ifeq ($(TARGET_PREBUILT_KERNEL),)
+ifeq ($(USE_SVELTE_KERNEL),true)
+LOCAL_KERNEL := device/lge/hammerhead_svelte-kernel/zImage-dtb
+else
+
+ifneq ($(filter hammerhead_fp aosp_hammerhead_fp,$(TARGET_PRODUCT)),)
+LOCAL_KERNEL := device/lge/hammerhead_fp-kernel/zImage-dtb
+else
+LOCAL_KERNEL := device/lge/hammerhead/franco/zImage
+endif
+
+endif
+else
+LOCAL_KERNEL := $(TARGET_PREBUILT_KERNEL)
+endif
+
+
+PRODUCT_COPY_FILES := \
+    $(LOCAL_KERNEL):kernel
+
 PRODUCT_COPY_FILES += \
     device/lge/hammerhead/init.hammerhead.rc:root/init.hammerhead.rc \
     device/lge/hammerhead/init.hammerhead.usb.rc:root/init.hammerhead.usb.rc \
     device/lge/hammerhead/fstab.hammerhead:root/fstab.hammerhead \
     device/lge/hammerhead/ueventd.hammerhead.rc:root/ueventd.hammerhead.rc \
+    device/lge/hammerhead/init.fk.rc:root/init.fk.rc \
+    device/lge/hammerhead/init.supolicy.sh:root/init.supolicy.sh \
     device/lge/hammerhead/init.performance_profiles.rc:root/init.performance_profiles.rc \
 
 # Input device files for hammerhead
