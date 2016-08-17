@@ -34,9 +34,9 @@ BOARD_KERNEL_IMAGE_NAME := zImage-dtb
 TOUCH_BOOST_DEBUG := false
 
 # Define kernel config for inline building
-TARGET_KERNEL_CONFIG := hells_defconfig
-TARGET_KERNEL_SOURCE := kernel/lge/hells-Core-N5
-TARGET_GCC_VERSION_ARM := 5.3
+TARGET_KERNEL_CONFIG := elementalx_defconfig
+TARGET_KERNEL_SOURCE := kernel/lge/ElementalX-N5
+TARGET_GCC_VERSION_ARM := 4.9
 
 TOUCH_BOOST_DEBUG := false
 
